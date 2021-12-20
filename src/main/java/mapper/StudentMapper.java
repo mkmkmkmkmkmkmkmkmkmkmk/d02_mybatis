@@ -16,12 +16,14 @@ public interface StudentMapper {
     List<Student> findStudents();
 
     /**
-     * 两个参数
+     * 两个参数：@param注解可以使用该注解自己指定占位符的名称
      * @param id
      * @param name
      * @return
      */
     Student findStudent1(Integer id,String name);
+
+
     Student findStudent2(@Param("id") Integer id,@Param("name") String name);
 
 }
