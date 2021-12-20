@@ -42,10 +42,18 @@
     </select>
     <!--<select id="findStudent2"  resultType="pojo.Student">
         select * from t_students where id=#{param1} and name=#{param2};
-    </selec-->t>
+    </selec-->
     <!--<select id="findStudent2"  resultType="pojo.Student">
        select * from t_students where id=#{arg0} and name=#{arg1};
    </select>-->
+    <!--2.2.3 map结构，占位符的名称就是map的key。-->
+    <select id="findStudents1"  resultType="pojo.Student">
+        select * from t_students where id=#{idd} and name=#{name};
+    </select>
+    <!--模糊查询测试-->
+    <select id="findStudentsByName"  resultType="pojo.Student">
+        select * from t_students where name like concat('%',#{name},'%');
+    </select>
 
 
 

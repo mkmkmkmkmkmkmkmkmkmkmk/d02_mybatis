@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import pojo.Student;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author：Weiyu
@@ -26,4 +27,17 @@ public interface StudentMapper {
 
     Student findStudent2(@Param("id") Integer id,@Param("name") String name);
 
+    /**
+     * 不推荐使用，需要查看配置文件才能知道怎么在类中传递参数
+     * @param conditions
+     * @return
+     */
+    List<Student> findStudents1(Map<String,Object> conditions);
+
+    /**
+     * 模糊查询测试
+     * @param name
+     * @return
+     */
+    List<Student> findStudentsByName(String name);
 }

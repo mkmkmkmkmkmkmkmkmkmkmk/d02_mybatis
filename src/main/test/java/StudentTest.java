@@ -5,7 +5,9 @@ import mapper.StudentMapper;
 import org.junit.Test;
 import pojo.Student;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author：Weiyu
@@ -30,7 +32,7 @@ public class StudentTest extends BaseSqlSession{
     }
 
     /**
-     * 测试查询有一个参数的sql语句
+     * 2.2.1测试查询有一个参数的sql语句
      */
     @Test
     public void TwoParamTest1() {
@@ -46,6 +48,25 @@ public class StudentTest extends BaseSqlSession{
     public void TwoParamTest2() {
         StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
         Student student = mapper.findStudent2(2,"李四");
+        System.out.println(student);
+    }
+    @Test
+    public void MapParamTest(){
+        Map<String,Object> map=new HashMap<>();
+        map.put("idd",5);
+        map.put("name","李四");
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+        List<Student> students = mapper.findStudents1(map);
+        System.out.println(students);
+    }
+
+    /**
+     * 测试模糊查询
+     */
+    @Test
+    public  void vagueWordsTest(){
+        StudentMapper mapper= sqlSession.getMapper(StudentMapper.class);
+        List<Student> student=mapper.findStudentsByName("张三");
         System.out.println(student);
     }
 
