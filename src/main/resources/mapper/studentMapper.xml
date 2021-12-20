@@ -106,6 +106,7 @@
     <select id="findStudents5" resultType="pojo.Student">
         select * from t_students
         <trim prefix="where" prefixOverrides="and">
+#         =<where/>
             <if test="name!=null">
                 and name=#{name}
             </if>
