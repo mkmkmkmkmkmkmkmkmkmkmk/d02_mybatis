@@ -15,6 +15,12 @@ import java.util.Map;
 public interface StudentMapper {
     Student findStudentById(Integer id);
     List<Student> findStudents();
+    /**
+     * 不推荐使用，需要查看配置文件才能知道怎么在类中传递参数
+     * @param conditions
+     * @return
+     */
+    List<Student> findStudents1(Map<String,Object> conditions);
 
     /**
      * 两个参数：@param注解可以使用该注解自己指定占位符的名称
@@ -27,12 +33,7 @@ public interface StudentMapper {
 
     Student findStudent2(@Param("id") Integer id,@Param("name") String name);
 
-    /**
-     * 不推荐使用，需要查看配置文件才能知道怎么在类中传递参数
-     * @param conditions
-     * @return
-     */
-    List<Student> findStudents1(Map<String,Object> conditions);
+
 
     /**
      * 模糊查询测试
@@ -40,4 +41,17 @@ public interface StudentMapper {
      * @return
      */
     List<Student> findStudentsByName(String name);
+
+    /**
+     *ResultType结果集的自动映射
+     * @return
+     */
+
+    Student findStudents2();
+
+    /**
+     *测试 mapUnderscoreToCamelCase为true
+     * @return
+     */
+    List<Student> findStudents3();
 }

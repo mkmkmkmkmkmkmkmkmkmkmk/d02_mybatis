@@ -69,5 +69,25 @@ public class StudentTest extends BaseSqlSession{
         List<Student> student=mapper.findStudentsByName("张三");
         System.out.println(student);
     }
+    /**
+     * 数据库别名查询
+     */
+    @Test
+    public void aliasTest(){
+        StudentMapper mapper= sqlSession.getMapper(StudentMapper.class);
+        Student student=mapper.findStudents2();
+        System.out.println(student);
+    }
+
+    /**
+     *  测试<setting name="mapUnderscoreToCamelCase" value="true"/>
+     *  主要用于==结果集的字段名==和实体类的属性名一致的情况。
+     */
+    @Test
+    public void ResultTypeTest(){
+        StudentMapper mapper= sqlSession.getMapper(StudentMapper.class);
+        List<Student> student=mapper.findStudents3();
+        System.out.println(student);
+    }
 
 }

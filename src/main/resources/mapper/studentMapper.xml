@@ -50,11 +50,18 @@
     <select id="findStudents1"  resultType="pojo.Student">
         select * from t_students where id=#{idd} and name=#{name};
     </select>
-    <!--模糊查询测试-->
+    <!--3.模糊查询测试-->
     <select id="findStudentsByName"  resultType="pojo.Student">
         select * from t_students where name like concat('%',#{name},'%');
     </select>
 
-
+    <!--数据库别名查询：-->
+   <!-- <select id="findStudents2"  resultType="pojo.Student">
+        select id sid ,name sname ,gender sgender from t_students;
+    </select>-->
+    <!--ResultType结果集的自动映射-->
+    <select id="findStudents3"  resultType="pojo.Student">
+        select id sid ,name sname ,gender, native_province from t_students;
+    </select>
 
 </mapper>

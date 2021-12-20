@@ -27,4 +27,5 @@ public class Student implements Serializable {
     private String name;
     private Boolean gender;
     private Character grade;
+    private String nativeProvince;
 }
