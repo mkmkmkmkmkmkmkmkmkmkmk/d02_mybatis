@@ -77,5 +77,14 @@
         SELECT id sid,NAME sname,gender sgender,grade sgrade, native_province FROM t_students
     </select>
 
+    <!--7.
+        useGeneratedKeys:true。获取数据库生成的主键
+        keyColumn：主键字段名
+        keyProperty：接收主键字段值的实体类属性名
+    -->
+    <insert id="saveStudent" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_students (id,name,gender,grade,native_province) values(null,#{name},#{gender},#{grade},#{nativeProvince})
+    </insert>
+
 
 </mapper>
