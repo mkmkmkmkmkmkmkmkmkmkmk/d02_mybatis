@@ -26,7 +26,7 @@
          <package name="pojo"/>
      </typeAliases>-->
     
-    <!--分页插件-->
+    <!--5.分页插件-->
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
     </plugins>
@@ -45,7 +45,25 @@
             </dataSource>
         </environment>
         </environments>
-    <mappers>
+    <!--6.1.指定映射文件的路径〔相对于classpath)-->
+   <!-- <mappers>
         <mapper resource="mapper/StudentMapper.xml"/>
+    </mappers>-->
+
+    <!--6.2.通过注册Mapper接口的方式-->
+    <!--映射文件编写遵循以下要求:-->
+    <!--a、映射文件所在的文件夹必须和Mapper接口的包完全一致-->
+    <!--b、映射文件的主文件名必须和Mapper接口的类名完全一致-->
+    <!--<mappers>
+        <mapper resource="mapper.StudentMapper"/>
+    </mappers>-->
+
+    <!--6.3批量注册:推荐使用这种-->
+    <!--mybatis将会按照默认规则依次注册包中所有接口对应的映射文件。-->
+    <mappers>
+        <package name="mapper"/>
     </mappers>
+
+
+
 </configuration>
