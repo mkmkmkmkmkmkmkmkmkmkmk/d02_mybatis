@@ -62,7 +62,18 @@ public interface StudentMapper {
      */
     int saveStudent(Student student);
     /**
-     *
+     *非主键自增保存一个学生
      */
     int saveStudent1(Student student);
+
+    /**
+     *
+     * @param name
+     * @param nativeProvince
+     * @return
+     */
+    //List<Student>findStudents(String name,String nativeProvince);
+    List<Student> findStudents5(@Param("name") String name,@Param("nativeProvince") String nativeProvince);
+
+
 }

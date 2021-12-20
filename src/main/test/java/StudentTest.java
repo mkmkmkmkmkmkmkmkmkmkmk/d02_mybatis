@@ -126,4 +126,12 @@ public class StudentTest extends BaseSqlSession {
         sqlSession.commit();
         System.out.println(i);
     }
+    @Test
+    public void IfTest(){
+            StudentMapper mapper = sqlSession. getMapper(StudentMapper.class);
+            List<Student> students = mapper.findStudents5( null,null);
+            //List<Student> students = mapper.findStudents5( "","");
+            students.forEach(System.out::println);
+
+        }
 }

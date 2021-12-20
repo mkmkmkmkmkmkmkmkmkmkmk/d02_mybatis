@@ -12,7 +12,7 @@
    <!-- <insert id="saveStudent" parameterType="pojo.Student">
         INSERT INTO t_students(id,`name`,gender,grade) VALUES(NULL,#{name},#{gender},#{grade})
     </insert>-->
-    <sql id="sql1"><include refid="sql1"/>  </sql>
+    <sql id="sql1">select * from t_students</sql>
     <update id="updateStudent">
         UPDATE t_students SET `name`=#{name},gender=#{gender},grade=#{grade} WHERE id=#{id}
     </update>
@@ -60,7 +60,7 @@
         select id sid ,name sname ,gender sgender from t_students;
     </select>-->
     <!--5.ResultType结果集的自动映射-->
-    <select id="findStudents3"  resultType="pojo.Student">
+    <select id="findStudents4"  resultType="pojo.Student">
         select id sid ,name sname ,gender, native_province from t_students;
     </select>
     <!--6.ResultMap-->
@@ -98,7 +98,20 @@
         </selectKey>
         insert into t_students (id,name,gender,grade,native_province) values(null,#{name},#{gender},#{grade},#{nativeProvince})
     </insert>
-
-
-
+    <!--8.-->
+    <!--where:
+            如果没有主体内容，什么都不做。
+            如果有主体内容，自动加上where关键字，并且会去掉第一个and字符
+    -->
+    <select id="findStudents5" resultType="pojo.Student">
+        select * from t_students
+        <trim prefix="where" prefixOverrides="and">
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="nativeProvince!=null">
+                and native_province=#{nativeProvince}
+            </if>
+        </trim>
+    </select>
 </mapper>
