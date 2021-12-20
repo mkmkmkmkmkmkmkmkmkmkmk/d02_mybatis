@@ -24,4 +24,10 @@
     <select id="findStudents" resultType="pojo.Student">
         SELECT * FROM t_students
     </select>
+
+    <!--2.1: Mapper接口中的方法参数只有一个简单类型的参数-->
+    <select id="findStudentById" parameterType="int" resultType="pojo.Student">
+        select * from t_students where id=#{随便写};
+    </select>
+
 </mapper>

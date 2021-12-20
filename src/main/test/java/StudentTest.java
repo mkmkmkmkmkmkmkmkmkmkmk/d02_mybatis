@@ -28,4 +28,10 @@ public class StudentTest extends BaseSqlSession{
         studentPageInfo.getList().forEach(System.out::println);
 
     }
-}
+    @Test
+    public void OneParamTest() {
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+        Student student = mapper.findStudentById(1);
+        System.out.println(student);
+    }
+ }
