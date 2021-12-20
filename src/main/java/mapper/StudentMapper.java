@@ -46,7 +46,6 @@ public interface StudentMapper {
      *ResultType结果集的自动映射
      * @return
      */
-
     Student findStudents2();
 
     /**
@@ -56,4 +55,14 @@ public interface StudentMapper {
     List<Student> findStudents3();
 
     List<Student> findAl1Students();
+
+    /**
+     * 主键自增保存一个学生
+     * @return
+     */
+    int saveStudent(Student student);
+    /**
+     *
+     */
+    int saveStudent1(Student student);
 }

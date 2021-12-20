@@ -9,9 +9,9 @@
             #{name}表示占位符，对应的是parameterType类型的属性名称（getter或setter去掉get或set然后首字母小写）
             表示获取name的取值
     -->
-    <insert id="saveStudent" parameterType="pojo.Student">
+   <!-- <insert id="saveStudent" parameterType="pojo.Student">
         INSERT INTO t_students(id,`name`,gender,grade) VALUES(NULL,#{name},#{gender},#{grade})
-    </insert>
+    </insert>-->
 
     <update id="updateStudent">
         UPDATE t_students SET `name`=#{name},gender=#{gender},grade=#{grade} WHERE id=#{id}
@@ -76,8 +76,8 @@
     <select id="findAl1Students" resultMap="studentMap">
         SELECT id sid,NAME sname,gender sgender,grade sgrade, native_province FROM t_students
     </select>
-
-    <!--7.
+    <!--7.获取数据库生成的主键-->
+    <!--7.1.方式一:适用于支持主键自动增长的数据库，比如Mysql,Sql Server等
         useGeneratedKeys:true。获取数据库生成的主键
         keyColumn：主键字段名
         keyProperty：接收主键字段值的实体类属性名
@@ -85,6 +85,20 @@
     <insert id="saveStudent" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into t_students (id,name,gender,grade,native_province) values(null,#{name},#{gender},#{grade},#{nativeProvince})
     </insert>
+    <!--7.2方式二:对于不支持主键自动增长的数据-->
+    <insert id="saveStudent1">
+        <!--获取数据库生成的主键：
+            keyColumn：主键字段名
+            keyProperty：接收主键字段值的实体类属性名
+            resultType：主键的类型
+            order：语句在插入之后还是之前执行
+        -->
+        <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_students (id,name,gender,grade,native_province) values(null,#{name},#{gender},#{grade},#{nativeProvince})
+    </insert>
+
 
 
 </mapper>
