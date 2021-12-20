@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须指定,作用类似java的package-->
+<mapper namespace="mapper.StudentMapper">
+    <!--parameterType指定要保存的数据类型。该属性一般情况下可以省略不写-->
+    <!--SQL语句：
+            #{name}表示占位符，对应的是parameterType类型的属性名称（getter或setter去掉get或set然后首字母小写）
+            表示获取name的取值
+    -->
+    <insert id="saveStudent" parameterType="pojo.Student">
+        INSERT INTO t_students(id,`name`,gender,grade) VALUES(NULL,#{name},#{gender},#{grade})
+    </insert>
+
+    <update id="updateStudent">
+        UPDATE t_students SET `name`=#{name},gender=#{gender},grade=#{grade} WHERE id=#{id}
+    </update>
+    <!--由于参数是一个简单类型（8中基本和String），且参数只有一个，占位符名称随便写-->
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM t_students    WHERE id=#{id}
+    </delete>
+    <!--resultType不能省略：结果集封装的目标类型。仅限于查询结果集的字段名和实体类属性名一致的情况-->
+    <select id="findStudents" resultType="pojo.Student">
+        SELECT * FROM t_students
+    </select>
+</mapper>
