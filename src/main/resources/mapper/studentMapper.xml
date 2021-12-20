@@ -29,5 +29,24 @@
     <select id="findStudentById" parameterType="int" resultType="pojo.Student">
         select * from t_students where id=#{随便写};
     </select>
+    <!--2.2: Mapper接口中的方法参数有多个简单类型的参数-->
+    <!--小结:采用mybatis内置的引用名称。argO或param1,表示第一个参数占位符,arg1,或param2表示第二个占位符，依次类推。-->
+    <!--2.2.1.StudentMapper接口中：Student findStudent1(Integer id,String name);-->
+    <select id="findStudent1" resultType="pojo.Student">
+        select * from t_students where id=#{arg0} and name=#{arg1};
+    </select>
+    <!--2.2.2 StudentMapper接口中：id,@Param("name") String name);-->
+    <!--Available parameters are [name, id, param1, param2]-->
+    <select id="findStudent2"  resultType="pojo.Student">
+            select * from t_students where id=#{id} and name=#{name};
+    </select>
+    <!--<select id="findStudent2"  resultType="pojo.Student">
+        select * from t_students where id=#{param1} and name=#{param2};
+    </selec-->t>
+    <!--<select id="findStudent2"  resultType="pojo.Student">
+       select * from t_students where id=#{arg0} and name=#{arg1};
+   </select>-->
+
+
 
 </mapper>

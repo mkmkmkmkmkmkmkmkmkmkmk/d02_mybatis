@@ -28,10 +28,25 @@ public class StudentTest extends BaseSqlSession{
         studentPageInfo.getList().forEach(System.out::println);
 
     }
+
+    /**
+     * 测试查询有一个参数的sql语句
+     */
     @Test
-    public void OneParamTest() {
+    public void TwoParamTest1() {
         StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
-        Student student = mapper.findStudentById(1);
+        Student student = mapper.findStudent1(1,"李四");
         System.out.println(student);
     }
- }
+
+    /**
+     * 2.2.2测试查询有两个参数的sql语句
+     */
+    @Test
+    public void TwoParamTest2() {
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+        Student student = mapper.findStudent2(2,"李四");
+        System.out.println(student);
+    }
+
+}

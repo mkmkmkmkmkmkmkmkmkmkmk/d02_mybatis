@@ -1,5 +1,6 @@
 package mapper;
 
+import org.apache.ibatis.annotations.Param;
 import pojo.Student;
 
 import java.util.List;
@@ -13,4 +14,14 @@ import java.util.List;
 public interface StudentMapper {
     Student findStudentById(Integer id);
     List<Student> findStudents();
+
+    /**
+     * 两个参数
+     * @param id
+     * @param name
+     * @return
+     */
+    Student findStudent1(Integer id,String name);
+    Student findStudent2(@Param("id") Integer id,@Param("name") String name);
+
 }
