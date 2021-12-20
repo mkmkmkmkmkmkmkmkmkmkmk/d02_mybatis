@@ -54,4 +54,6 @@ public interface StudentMapper {
      * @return
      */
     List<Student> findStudents3();
+
+    List<Student> findAl1Students();
 }

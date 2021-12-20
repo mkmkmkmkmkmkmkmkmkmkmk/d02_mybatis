@@ -55,13 +55,27 @@
         select * from t_students where name like concat('%',#{name},'%');
     </select>
 
-    <!--数据库别名查询：-->
+    <!--4.数据库别名查询：-->
    <!-- <select id="findStudents2"  resultType="pojo.Student">
         select id sid ,name sname ,gender sgender from t_students;
     </select>-->
-    <!--ResultType结果集的自动映射-->
+    <!--5.ResultType结果集的自动映射-->
     <select id="findStudents3"  resultType="pojo.Student">
         select id sid ,name sname ,gender, native_province from t_students;
     </select>
+    <!--6.ResultMap-->
+    <resultMap id="studentMap" type="pojo.Student">
+        <!--id映射主键个数-->
+        <id column="sid" property="id"/>
+        <!--result映射非主键个数-->
+        <result column="sgender" property="gender"/>
+        <result column="sname" property="name" />
+        <result column="sgrade" property="grade"/>
+        <result column="native_province" property="nativeProvince"/>
+    </resultMap>
+    <select id="findAl1Students" resultMap="studentMap">
+        SELECT id sid,NAME sname,gender sgender,grade sgrade, native_province FROM t_students
+    </select>
+
 
 </mapper>

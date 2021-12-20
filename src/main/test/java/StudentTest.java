@@ -89,5 +89,15 @@ public class StudentTest extends BaseSqlSession{
         List<Student> student=mapper.findStudents3();
         System.out.println(student);
     }
+    /**
+     * 测试ResultMap
+     */
+    @Test
+    public  void ResultMapTest(){
+        //StudentMapper接口和xml建立映射关系
+        StudentMapper mapper= sqlSession.getMapper(StudentMapper.class);
+        List<Student> student=mapper.findAl1Students();
+        System.out.println(student);
+    }
 
 }
