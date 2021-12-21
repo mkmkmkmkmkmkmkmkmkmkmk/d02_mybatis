@@ -12,7 +12,7 @@ import java.util.List;
  **/
 public class EmployeeTest extends BaseSqlSession{
     @Test
-    public void LeftJoinTest(){
+    public void RightJoinTest(){
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
         List<Employee> employeeList=mapper.findAllEmployeesByDepts();
         for (Employee employee:
