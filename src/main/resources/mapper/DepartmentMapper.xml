@@ -3,20 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace必须指定,作用类似java的package-->
-<!--1.手动映射，ResultMap的继承+collection的使用连接查询映射之查询关联的多的数据-->
+
 <mapper namespace="mapper.DepartmentMapper">
-    <resultMap id="deptmap" type="pojo.Department">
-        <id column="did" property="did" />
+    <!--1.手动映射，ResultMap的继承+collection的使用连接查询映射之查询关联的多的数据-->
+    <!--<resultMap id="deptmap" type="pojo.Department">
+        <id column="did" property="did"/>
         <result column="dname" property="dname"/>
     </resultMap>
     <resultMap id="deptEmpMap" extends="deptmap" type="pojo.Department">
         <collection property="emps" column="did" ofType="pojo.Employee">
-            <id column="eid" property="eid" />
-            <result column="ename" property="ename"/><result column="salary" property="salary" />
+            <id column="eid" property="eid"/>
+            <result column="ename" property="ename"/><result column="salary" property="salary"/>
         </collection>
     </resultMap>
     <select id="findAllDeptsWithEmps" resultType="pojo.Department">
         SELECT * FROM t_departments d Left OUTER JOIN t_employees e ON d.`did`=e.`dept_id`;
+    </select>-->
+    <!--2.手动映射：嵌套查询之查询关联的一的数据.-->
+    <select id="findDeptByDid" resultType="pojo.Department">
+        SELECT* FROM t_departments WHERE did=#{did}
     </select>
 
 </mapper>

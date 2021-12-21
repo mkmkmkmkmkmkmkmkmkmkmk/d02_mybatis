@@ -14,4 +14,6 @@ public interface EmployeeMapper {
     ///连接查询:查询所有的员工及员工所属的部门
 
     List<Employee> findAllEmployeesByDepts();
+    //嵌套查询
+    List<Employee> findAllEmpsWithDepts1();
 }

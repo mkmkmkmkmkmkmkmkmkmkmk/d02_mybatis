@@ -39,12 +39,12 @@
     </select>-->
 
     <!--1.3手动映射，ResultMap的继承-->
-    <resultMap id="empMap" type="pojo.Employee">
+   <!-- <resultMap id="empMap" type="pojo.Employee">
         <id column="eid" property="eid"/>
         <result column="ename" property="ename"/>
         <result column="salary" property="salary"/>
     </resultMap>
-    <!--<resultMap id="empDeptMap" extends="empMap" type="pojo.Employee">
+    <resultMap id="empDeptMap" extends="empMap" type="pojo.Employee">
         <result column="did" property="department.did"/>
         <result column="dname" property="department.dname"/>
     </resultMap>
@@ -52,7 +52,7 @@
         SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
     </select>-->
     <!--1.4手动映射，ResultMap的继承+association的使用-->
-    <resultMap id="empDeptMap1" extends="empMap" type="pojo.Employee">
+   <!-- <resultMap id="empDeptMap1" extends="empMap" type="pojo.Employee">
         <association property="department" column="dept_id" javaType="pojo.Department">
         <id column="did" property="did"/>
         <result column="dname" property="dname"/>
@@ -60,5 +60,21 @@
     </resultMap>
     <select id="findAllEmployeesByDepts" resultMap="empDeptMap1">
         SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
+    </select>-->
+
+    <!--2.手动映射，ResultMap的继承+association嵌套查询又叫做分步查询。比如查询所有部门及部门中的员工-->
+    <resultMap id="empMap" type="pojo.Employee">
+        <id column="eid" property="eid"/>
+        <result column="ename" property="ename"/>
+        <result column="salary" property="salary"/>
+    </resultMap>
+    <!--2.2查询所有员工-->
+    <resultMap id="empDeptMap2" extends="empMap" type="pojo.Employee">
+        <!--2.2 根据部门id查询部门：SELECT* FROM t_departments WHERE did=1;SELECT *FROM t_departments wHERE did=2;-->
+        <association property="department" column="dept_id" javaType="pojo.Department" select="mapper.DepartmentMapper.findDeptByDid"/>
+    </resultMap>
+    <!--2.1查询所有员工：SELECT * FROM t_employees;-->
+    <select id="findAllEmpsWithDepts1" resultMap="empDeptMap2">
+        SELECT * FROM t_employees
     </select>
 </mapper>

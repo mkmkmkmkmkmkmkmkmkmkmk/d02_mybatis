@@ -21,6 +21,20 @@ public class EmployeeTest extends BaseSqlSession{
             System.out.println(employee);
             System.out.println(employee.getDepartment());
         }
+    }
 
+    /**
+     * 2.嵌套查询
+     */
+    @Test
+    public void Test(){
+        EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+        List<Employee> employeeList=mapper.findAllEmpsWithDepts1();
+        for (Employee employee:
+             employeeList) {
+            System.out.println("-------------------");
+            System.out.println(employee);
+            System.out.println(employee.getDepartment());
+        }
     }
 }

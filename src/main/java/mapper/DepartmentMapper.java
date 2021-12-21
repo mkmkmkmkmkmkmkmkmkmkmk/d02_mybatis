@@ -1,6 +1,7 @@
 package mapper;
 
 import pojo.Department;
+import pojo.Employee;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ import java.util.List;
 public interface DepartmentMapper {
     //连接查询:查询所有部门，关联查询对应的员工
     List<Department> findAllDeptsWithEmps();
+
+
+    Department findDeptByDid(Integer did) ;
 }
