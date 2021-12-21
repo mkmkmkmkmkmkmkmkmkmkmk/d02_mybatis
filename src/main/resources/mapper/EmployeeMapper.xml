@@ -21,6 +21,11 @@
         DELETE FROM t_employees    WHERE eid=#{id}
     </delete>-->
 
+    <!--1.1自动映射失效，必须手映射-->
+    <!-- <select id="findAllEmployeesByDepts" resultType="pojo.Employee">
+         SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
+     </select>-->
+
     <!--1.2手动映射ResultMap-->
    <!--<resultMap id="empMap" type="pojo.Employee">
        <id column="eid" property="eid"/>
@@ -32,22 +37,28 @@
     <select id="findAllEmployeesByDepts" resultMap="empMap">
         SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
     </select>-->
+
     <!--1.3手动映射，ResultMap的继承-->
     <resultMap id="empMap" type="pojo.Employee">
         <id column="eid" property="eid"/>
         <result column="ename" property="ename"/>
         <result column="salary" property="salary"/>
     </resultMap>
-    <resultMap id="empDeptMap" extends="empMap" type="pojo.Employee">
+    <!--<resultMap id="empDeptMap" extends="empMap" type="pojo.Employee">
         <result column="did" property="department.did"/>
         <result column="dname" property="department.dname"/>
     </resultMap>
     <select id="findAllEmployeesByDepts" resultMap="empDeptMap">
         SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
-    </select>
-
-    <!--1.1自动映射失效，必须手映射-->
-   <!-- <select id="findAllEmployeesByDepts" resultType="pojo.Employee">
-        SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
     </select>-->
+    <!--1.4手动映射，ResultMap的继承+association的使用-->
+    <resultMap id="empDeptMap1" extends="empMap" type="pojo.Employee">
+        <association property="department" column="dept_id" javaType="pojo.Department">
+        <id column="did" property="did"/>
+        <result column="dname" property="dname"/>
+        </association>
+    </resultMap>
+    <select id="findAllEmployeesByDepts" resultMap="empDeptMap1">
+        SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
+    </select>
 </mapper>
