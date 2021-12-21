@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须指定,作用类似java的package-->
+<mapper namespace="mapper.EmployeeMapper">
+    <!--parameterType指定要保存的数据类型。该属性一般情况下可以省略不写-->
+    <!--SQL语句：
+            #{name}表示占位符，对应的是parameterType类型的属性名称（getter或setter去掉get或set然后首字母小写）
+            表示获取name的取值
+    -->
+    <!--<insert id="saveStudent" parameterType="pojo.Student">
+        INSERT INTO t_employees(id,`name`,gender,grade) VALUES(NULL,#{name},#{gender},#{grade})
+    </insert>-->
+
+   <!-- <update id="updateStudent">
+        UPDATE t_employees SET `name`=#{name},gender=#{gender},grade=#{grade} WHERE id=#{id}
+    </update>-->
+    <!--由于参数是一个简单类型（8中基本和String），且参数只有一个，占位符名称随便写-->
+    <!--<delete id="deleteStudent" parameterType="int">
+        DELETE FROM t_employees    WHERE eid=#{id}
+    </delete>-->
+
+    <!--1.2手动映射-->
+   <resultMap id="empMap" type="pojo.Employee">
+       <id column="eid" property="eid"/>
+       <result column="ename" property="ename"/>
+       <result column="salary" property="salary"/>
+       <result column="did" property="department.did"/>
+       <result column="dname" property="department.dname"/>
+   </resultMap>
+    <select id="findAllEmployeesByDepts" resultMap="empMap">
+        SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
+    </select>
+
+    <!--1.1自动映射失效，必须手映射-->
+   <!-- <select id="findAllEmployeesByDepts" resultType="pojo.Employee">
+        SELECT * FROM t_employees te left outer join t_departments td on te.dept_id=td.did;
+    </select>-->
+</mapper>
