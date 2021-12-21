@@ -63,18 +63,22 @@
     </select>-->
 
     <!--2.手动映射，ResultMap的继承+association嵌套查询又叫做分步查询。比如查询所有部门及部门中的员工-->
-    <resultMap id="empMap" type="pojo.Employee">
+   <!-- <resultMap id="empMap" type="pojo.Employee">
         <id column="eid" property="eid"/>
         <result column="ename" property="ename"/>
         <result column="salary" property="salary"/>
     </resultMap>
-    <!--2.2查询所有员工-->
+    &lt;!&ndash;2.2查询所有员工&ndash;&gt;
     <resultMap id="empDeptMap2" extends="empMap" type="pojo.Employee">
-        <!--2.2 根据部门id查询部门：SELECT* FROM t_departments WHERE did=1;SELECT *FROM t_departments wHERE did=2;-->
+        &lt;!&ndash;2.2 根据部门id查询部门：SELECT* FROM t_departments WHERE did=1;SELECT *FROM t_departments wHERE did=2;&ndash;&gt;
         <association property="department" column="dept_id" javaType="pojo.Department" select="mapper.DepartmentMapper.findDeptByDid"/>
     </resultMap>
-    <!--2.1查询所有员工：SELECT * FROM t_employees;-->
+    &lt;!&ndash;2.1查询所有员工：SELECT * FROM t_employees;&ndash;&gt;
     <select id="findAllEmpsWithDepts1" resultMap="empDeptMap2">
         SELECT * FROM t_employees
+    </select>-->
+    <!--3.手动映射：嵌套查询 -->
+    <select id="findEmpsById" resultType="pojo.Employee">
+        select * from t_employees where dept_id=#{did}
     </select>
 </mapper>

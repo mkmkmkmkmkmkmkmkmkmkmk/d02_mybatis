@@ -37,4 +37,5 @@ public class EmployeeTest extends BaseSqlSession{
             System.out.println(employee.getDepartment());
         }
     }
+
 }
