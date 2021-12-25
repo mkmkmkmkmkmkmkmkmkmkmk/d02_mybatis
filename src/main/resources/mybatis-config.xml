@@ -21,7 +21,7 @@
     </typeAliases>-->
      <!--方式二:批量设置别名,指定包名即可
      mybaits会将该包下的所有类型指定简单类名作为别名，
-     比如icom.offcn.domain.Student别名就是Student或STUDENT或student（不区分大小写)-->
+     比如 pojo.Student别名就是Student或STUDENT或student（不区分大小写)-->
      <!--<typeAliases>
          <package name="pojo"/>
      </typeAliases>-->
